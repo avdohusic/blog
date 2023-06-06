@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace SimpleBlog.Api.Controllers;
+namespace SimpleBlog.Api.Controllers.Abstractions;
 
 public class BaseController : ControllerBase
 {

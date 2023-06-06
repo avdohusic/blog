@@ -17,7 +17,7 @@ internal class DeleteBlogCommandHandler : ICommandHandler<DeleteBlogCommand>
     public async Task Handle(DeleteBlogCommand request, CancellationToken cancellationToken)
     {
         var blog = _blogRepository.GetBlogById(request.BlogId);
-        if(blog is null) 
+        if (blog is null)
         {
             throw new NotFoundException(nameof(Blog), request.BlogId);
         }

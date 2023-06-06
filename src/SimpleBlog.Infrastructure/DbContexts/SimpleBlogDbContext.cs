@@ -1,5 +1,5 @@
-﻿using SimpleBlog.Infrastructure.Extensions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using SimpleBlog.Infrastructure.Extensions;
 
 namespace SimpleBlog.Infrastructure.DbContexts;
 

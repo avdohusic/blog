@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MediatR;
 using SimpleBlog.Domain.Repositories;
 
 namespace SimpleBlog.Application.Features.Blogs.Queries;

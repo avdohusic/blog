@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace SimpleBlog.Application.Features.Users.Queries.GetUserByUsernameAndPassword;
+namespace SimpleBlog.Application.Features.Users.Queries;
+
+public sealed record GetUserByUsernameAndPasswordQuery(string Username, string Password) : IQuery<UserIdentity>;
 
 public sealed class GetUserByUsernameAndPasswordQueryHandler : IQueryHandler<GetUserByUsernameAndPasswordQuery, UserIdentity>
 {

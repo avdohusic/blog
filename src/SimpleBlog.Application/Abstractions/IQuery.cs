@@ -2,6 +2,8 @@
 
 namespace SimpleBlog.Application.Abstractions;
 
-public interface IQuery : IRequest { }
+public interface IQuery : IRequest
+{ }
 
-public interface IQuery<out TResponse> : IRequest<TResponse> { }
+public interface IQuery<out TResponse> : IRequest<TResponse>
+{ }

@@ -4,5 +4,4 @@ namespace SimpleBlog.Domain.Entities.Identity;
 
 public class UserIdentityRoleClaim : IdentityRoleClaim<int>
 {
-
 }

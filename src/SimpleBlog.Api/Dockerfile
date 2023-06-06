@@ -1,3 +1,5 @@
+#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
 EXPOSE 80
@@ -11,7 +13,7 @@ COPY ["src/SimpleBlog.Domain/SimpleBlog.Domain.csproj", "src/SimpleBlog.Domain/"
 COPY ["src/SimpleBlog.Infrastructure/SimpleBlog.Infrastructure.csproj", "src/SimpleBlog.Infrastructure/"]
 RUN dotnet restore "src/SimpleBlog.Api/SimpleBlog.Api.csproj"
 COPY . .
-WORKDIR "/src/SimpleBlog.Api"
+WORKDIR "/src/src/SimpleBlog.Api"
 RUN dotnet build "SimpleBlog.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish

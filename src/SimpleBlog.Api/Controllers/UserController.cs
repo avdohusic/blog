@@ -1,8 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SimpleBlog.Api.Controllers.Abstractions;
 using SimpleBlog.Application.Dtos;
-using SimpleBlog.Application.Features.Users.Commands.CreateUser;
+using SimpleBlog.Application.Features.Users.Commands;
 using SimpleBlog.Domain.Shared;
 
 namespace SimpleBlog.Api.Controllers;

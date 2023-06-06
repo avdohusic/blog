@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
-using SimpleBlog.Application.Features.Users.Queries.GetUserByUsernameAndPassword;
+using SimpleBlog.Application.Features.Users.Queries;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
@@ -58,5 +58,4 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
 
         return AuthenticateResult.Success(ticket);
     }
-
 }

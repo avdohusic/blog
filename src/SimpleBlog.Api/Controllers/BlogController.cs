@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SimpleBlog.Api.Controllers.Abstractions;
 using SimpleBlog.Application.Dtos;
 using SimpleBlog.Application.Features.Blogs.Commands;
 using SimpleBlog.Application.Features.Blogs.Queries;
@@ -66,7 +67,6 @@ public class BlogController : BaseController
         return CreatedAtAction("GetBlogById", new { id = result.BlogId }, result);
     }
 
-
     /// <summary>
     /// Update a blog
     /// </summary>
@@ -85,7 +85,6 @@ public class BlogController : BaseController
 
         return Ok(blog);
     }
-
 
     /// <summary>
     /// Delete a blog

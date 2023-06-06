@@ -1,6 +1,6 @@
-﻿using SimpleBlog.Application.Common.Behaviours;
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
+using SimpleBlog.Application.Common.Behaviours;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

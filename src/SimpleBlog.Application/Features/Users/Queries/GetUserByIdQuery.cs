@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 
-namespace SimpleBlog.Application.Features.Users.Queries.GetUserById;
+namespace SimpleBlog.Application.Features.Users.Queries;
+
+public sealed record GetUserByIdQuery(int UserId) : IQuery<UserDto>;
 
 public sealed class GetUserByIdQueryHandler : IQueryHandler<GetUserByIdQuery, UserDto>
 {

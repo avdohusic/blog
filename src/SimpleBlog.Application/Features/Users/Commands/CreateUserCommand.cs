@@ -1,9 +1,30 @@
 ﻿using AutoMapper;
-using SimpleBlog.Application.Common.Exceptions;
+using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
 
-namespace SimpleBlog.Application.Features.Users.Commands.CreateUser;
+namespace SimpleBlog.Application.Features.Users.Commands;
+
+public sealed record CreateUserCommand(string Username, string Password, string Email) : ICommand<UserDto>;
+
+public sealed class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+{
+    public CreateUserCommandValidator()
+    {
+        RuleFor(x => x.Username)
+            .NotEmpty()
+            .MaximumLength(50);
+
+        RuleFor(x => x.Password)
+            .NotEmpty()
+            .MaximumLength(50);
+
+        RuleFor(x => x.Email)
+            .NotEmpty()
+            .MaximumLength(50)
+            .EmailAddress();
+    }
+}
 
 public sealed class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserDto>
 {

@@ -1,6 +1,6 @@
-﻿using SimpleBlog.Domain.Constants;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SimpleBlog.Domain.Constants;
 
 namespace SimpleBlog.Infrastructure.DbContexts;
 
@@ -8,7 +8,6 @@ public class IdentityDbContext : IdentityDbContext<UserIdentity, UserIdentityRol
 {
     public IdentityDbContext(DbContextOptions<SimpleBlogDbContext> options) : base(options)
     {
-
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
