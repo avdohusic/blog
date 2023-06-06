@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  SimpleBlog.api:
+    container_name: simpleblog-api-service
+    image: ${DOCKER_REGISTRY-}simpleblogapi
+    build:
+      context: .
+      dockerfile: src/SimpleBlog.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - sqlserver
+  sqlserver:
+    container_name: simpleblog-dependency-mssql
+    image: mcr.microsoft.com/mssql/server
+    restart: unless-stopped
+    user: root
+    environment:
+      - ACCEPT_EULA=Y.
+      - SA_PASSWORD=Test123!
+    ports:
+      - "1433:1433"
+    volumes: 
+      - ./data/sqldata:/var/opt/mssql/data

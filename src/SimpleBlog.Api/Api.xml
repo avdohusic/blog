@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SimpleBlog.Api</name>
+    </assembly>
+    <members>
+        <member name="M:SimpleBlog.Api.Controllers.BlogController.GetAllBlogs">
+            <summary>
+            Returns all blogs
+            </summary>
+            <response code="200">Returns list of blogs</response>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleBlog.Api.Controllers.BlogController.GetBlogById(System.Int32)">
+            <summary>
+            Returns blog by id
+            </summary>
+            <response code="200">Returns specific blog by id</response>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleBlog.Api.Controllers.BlogController.CreateBlog(SimpleBlog.Application.Features.Blogs.Commands.CreateBlogCommand)">
+            <summary>
+            Create a blog
+            </summary>
+            <response code="201">Returns newly created blog</response>
+            <response code="400">One or more properties are not valid</response>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleBlog.Api.Controllers.BlogController.UpdateBlog(System.Int32,SimpleBlog.Application.Features.Blogs.Commands.UpdateBlogCommand)">
+            <summary>
+            Update a blog
+            </summary>
+            <response code="200">Returns updated blog</response>
+            <response code="400">One or more properties are not valid</response>
+            <response code="404">The blog was not found</response>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleBlog.Api.Controllers.BlogController.DeleteBlog(System.Int32)">
+            <summary>
+            Delete a blog
+            </summary>
+            <response code="204">The blog was successfully deleted</response>
+            <response code="404">The blog was not found</response>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleBlog.Api.Controllers.UserController.Register(SimpleBlog.Api.Models.UserRegistrationInputModel)">
+            <summary>
+            Create a user
+            </summary>
+            <response code="200">Returns newly created user</response>
+            <response code="400">One or more properties are not valid</response>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
