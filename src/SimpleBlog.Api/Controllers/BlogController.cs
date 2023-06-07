@@ -42,12 +42,12 @@ public class BlogController : BaseController
     /// </summary>
     /// <response code="200">Returns specific blog by id</response>
     /// <returns></returns>
-    [HttpGet("{id}")]
+    [HttpGet("{blogId}")]
     [ProducesResponseType(typeof(BlogDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetBlogById(int id)
+    public async Task<IActionResult> GetBlogById(Guid blogId)
     {
-        var query = new GetBlogByIdQuery(id);
+        var query = new GetBlogByIdQuery(blogId);
         return Ok(await _mediator.Send(query));
     }
 
@@ -64,7 +64,7 @@ public class BlogController : BaseController
     {
         var result = await _mediator.Send(command);
 
-        return CreatedAtAction("GetBlogById", new { id = result.BlogId }, result);
+        return CreatedAtAction("GetBlogById", new { blogId = result.BlogId }, result);
     }
 
     /// <summary>
@@ -74,13 +74,13 @@ public class BlogController : BaseController
     /// <response code="400">One or more properties are not valid</response>
     /// <response code="404">The blog was not found</response>
     /// <returns></returns>
-    [HttpPut("{id}")]
+    [HttpPut("{blogId}")]
     [ProducesResponseType(typeof(BlogDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> UpdateBlog(int id, UpdateBlogCommand command)
+    public async Task<IActionResult> UpdateBlog(Guid blogId, UpdateBlogCommand command)
     {
-        command.BlogId = id;
+        command.BlogId = blogId;
         var blog = await _mediator.Send(command);
 
         return Ok(blog);
@@ -92,12 +92,12 @@ public class BlogController : BaseController
     /// <response code="204">The blog was successfully deleted</response>
     /// <response code="404">The blog was not found</response>
     /// <returns></returns>
-    [HttpDelete("{id}")]
+    [HttpDelete("{blogId}")]
     [ProducesResponseType(typeof(BlogDto), StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> DeleteBlog(int id)
+    public async Task<IActionResult> DeleteBlog(Guid blogId)
     {
-        var command = new DeleteBlogCommand(id);
+        var command = new DeleteBlogCommand(blogId);
         await _mediator.Send(command);
 
         return NoContent();

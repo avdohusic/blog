@@ -12,12 +12,13 @@ public class GetAllBlogsQueryHandler : IQueryHandler<GetAllBlogsQuery, IEnumerab
 
     public GetAllBlogsQueryHandler(IBlogRepository blogRepository, IMapper mapper)
     {
-        this._blogRepository = blogRepository;
+        _blogRepository = blogRepository;
         _mapper = mapper;
     }
 
     public async Task<IEnumerable<BlogDto>> Handle(GetAllBlogsQuery request, CancellationToken cancellationToken)
     {
-        return _mapper.Map<IEnumerable<BlogDto>>(await _blogRepository.GetAllBlogs());
+        var blogs = await _blogRepository.GetAllBlogs();
+        return _mapper.Map<IEnumerable<BlogDto>>(blogs);
     }
 }

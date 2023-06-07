@@ -3,7 +3,7 @@ using SimpleBlog.Domain.Repositories;
 
 namespace SimpleBlog.Application.Features.Blogs.Commands;
 
-public sealed record DeleteBlogCommand(int BlogId) : ICommand;
+public sealed record DeleteBlogCommand(Guid BlogId) : ICommand;
 
 internal class DeleteBlogCommandHandler : ICommandHandler<DeleteBlogCommand>
 {

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using SimpleBlog.Domain.Repositories;
+using SimpleBlog.Domain.Utils;
 
 namespace SimpleBlog.Application.Features.Blogs.Commands;
 
@@ -30,22 +31,19 @@ internal class CreateBlogCommandHandler : ICommandHandler<CreateBlogCommand, Blo
 
     public CreateBlogCommandHandler(IBlogRepository blogRepository, IMapper mapper)
     {
-        this._blogRepository = blogRepository;
+        _blogRepository = blogRepository;
         _mapper = mapper;
     }
 
     public async Task<BlogDto> Handle(CreateBlogCommand request, CancellationToken cancellationToken)
     {
-        var blog = new Blog
-        {
-            Title = request.Title,
-            Content = request.Content,
-            Author = request.Author,
-            PublicationDate = DateTime.Now
-        };
+        var blog = Blog.New(request.Title, request.Content)
+            .WithAuthor(request.Author)
+            .WithPublicationDate(LocalClock.GetTime());
 
         await _blogRepository.AddBlog(blog);
 
-        return _mapper.Map<BlogDto>(blog);
+        var mappedBlog = _mapper.Map<BlogDto>(blog);
+        return mappedBlog;
     }
 }

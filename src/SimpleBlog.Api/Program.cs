@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SimpleBlog.Api.Helpers;
-using SimpleBlog.Infrastructure.DbContexts;
+using SimpleBlog.Infrastructure.Data;
+using SimpleBlog.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,7 @@ builder.Services.AddControllersDefault()
                 .AddSwaggerGenDefault()
                 .AddAuthenticationDefault()
                 .AddApplicationServices()
-                .AddInfrastructureServices(builder.Configuration);
+                .AddInfrastructureConfig(builder.Configuration);
 
 var app = builder.Build();
 

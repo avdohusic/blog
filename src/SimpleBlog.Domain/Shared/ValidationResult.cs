@@ -1,4 +1,6 @@
-﻿namespace SimpleBlog.Domain.Shared;
+﻿using System.Collections.Generic;
+
+namespace SimpleBlog.Domain.Shared;
 
 public class ValidationResult : ErrorResult
 {

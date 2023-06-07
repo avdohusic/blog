@@ -1,6 +1,18 @@
 version: '3.8'
 
 services:
+  sqlserver:
+    container_name: simpleblog-dependency-mssql
+    image: mcr.microsoft.com/mssql/server
+    restart: unless-stopped
+    user: root
+    environment:
+      - ACCEPT_EULA=Y.
+      - SA_PASSWORD=Test123!
+    ports:
+      - "1434:1433"
+    volumes:
+      - ./data/sqldata:/var/opt/mssql/data
   SimpleBlog.api:
     container_name: simpleblog-api-service
     image: ${DOCKER_REGISTRY-}simpleblogapi
@@ -18,15 +30,3 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
       - sqlserver
-  sqlserver:
-    container_name: simpleblog-dependency-mssql
-    image: mcr.microsoft.com/mssql/server
-    restart: unless-stopped
-    user: root
-    environment:
-      - ACCEPT_EULA=Y.
-      - SA_PASSWORD=Test123!
-    ports:
-      - "1434:1433"
-    volumes:
-      - ./data/sqldata:/var/opt/mssql/data

@@ -2,7 +2,7 @@
 
 public sealed record BlogDto
 (
-    int BlogId,
+    Guid BlogId,
     string Title,
     string Content,
     string Author,

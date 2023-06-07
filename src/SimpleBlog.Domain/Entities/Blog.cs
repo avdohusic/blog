@@ -1,9 +1,10 @@
-﻿namespace SimpleBlog.Domain.Entities;
+﻿using SimpleBlog.Domain.Entities.Abstract;
+using System;
 
-public class Blog
+namespace SimpleBlog.Domain.Entities;
+
+public sealed partial class Blog : BaseEntity<Guid>
 {
-    public int BlogId { get; set; }
-
     public string Title { get; set; }
 
     public string Content { get; set; }

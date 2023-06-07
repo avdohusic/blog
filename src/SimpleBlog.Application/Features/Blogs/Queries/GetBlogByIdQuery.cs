@@ -4,7 +4,7 @@ using SimpleBlog.Domain.Repositories;
 
 namespace SimpleBlog.Application.Features.Blogs.Queries;
 
-public sealed record GetBlogByIdQuery(int BlogId) : IQuery<BlogDto>;
+public sealed record GetBlogByIdQuery(Guid BlogId) : IQuery<BlogDto>;
 
 internal class GetBlogByIdQueryHandler : IQueryHandler<GetBlogByIdQuery, BlogDto>
 {
@@ -13,8 +13,8 @@ internal class GetBlogByIdQueryHandler : IQueryHandler<GetBlogByIdQuery, BlogDto
 
     public GetBlogByIdQueryHandler(IBlogRepository blogRepository, IMapper mapper)
     {
-        this._blogRepository = blogRepository;
-        this._mapper = mapper;
+        _blogRepository = blogRepository;
+        _mapper = mapper;
     }
 
     public async Task<BlogDto> Handle(GetBlogByIdQuery request, CancellationToken cancellationToken)

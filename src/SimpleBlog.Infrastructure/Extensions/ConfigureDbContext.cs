@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using SimpleBlog.Domain.Constants;
-using SimpleBlog.Infrastructure.Repositories;
+using SimpleBlog.Infrastructure.Data;
 using System.Reflection;
 
-namespace Microsoft.Extensions.DependencyInjection;
-
-public static class ConfigureServices
+namespace SimpleBlog.Infrastructure.Extensions;
+public static class ConfigureDbContext
 {
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddSimleDbContext(this IServiceCollection services, IConfiguration configuration)
     {
         var migrationsAssembly = typeof(InfrastructureAssembly).GetTypeInfo().Assembly.GetName().Name;
 
@@ -18,8 +18,6 @@ public static class ConfigureServices
 
         services.AddIdentityCore<UserIdentity>()
                 .AddEntityFrameworkStores<SimpleBlogDbContext>();
-
-        services.AddScoped<IBlogRepository, BlogRepository>();
 
         return services;
     }

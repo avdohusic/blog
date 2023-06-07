@@ -9,7 +9,7 @@ public class BlogConfiguration : IEntityTypeConfiguration<Blog>
     {
         builder.ToTable("Blog");
 
-        builder.HasKey(x => x.BlogId);
+        builder.HasKey(x => x.Id);
 
         builder.Property(e => e.Title)
                .IsRequired()
@@ -24,5 +24,7 @@ public class BlogConfiguration : IEntityTypeConfiguration<Blog>
 
         builder.Property(e => e.PublicationDate)
                .IsRequired();
+
+
     }
 }

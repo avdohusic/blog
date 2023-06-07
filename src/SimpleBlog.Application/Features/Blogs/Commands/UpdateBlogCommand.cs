@@ -7,7 +7,7 @@ namespace SimpleBlog.Application.Features.Blogs.Commands;
 
 public sealed class UpdateBlogCommand : ICommand<BlogDto>
 {
-    public int BlogId { get; set; }
+    public Guid BlogId { get; set; }
     public string Title { get; set; }
     public string Content { get; set; }
     public string Author { get; set; }
