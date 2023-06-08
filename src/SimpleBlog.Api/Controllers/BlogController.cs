@@ -5,6 +5,7 @@ using SimpleBlog.Api.Controllers.Abstractions;
 using SimpleBlog.Application.Dtos;
 using SimpleBlog.Application.Features.Blogs.Commands;
 using SimpleBlog.Application.Features.Blogs.Queries;
+using SimpleBlog.Domain.Constants;
 using SimpleBlog.Domain.Shared;
 
 namespace SimpleBlog.Api.Controllers;
@@ -49,6 +50,20 @@ public class BlogController : BaseController
     {
         var query = new GetBlogByIdQuery(blogId);
         return Ok(await _mediator.Send(query));
+    }
+
+    /// <summary>
+    /// Returns exported blogs in an Excel file
+    /// </summary>
+    /// <response code="200">Returns Excel file</response>
+    /// <returns></returns>
+    [HttpGet("export")]
+    [ProducesResponseType(typeof(File), StatusCodes.Status200OK)]
+    public async Task<IActionResult> ExportAllBlogs()
+    {
+        return File(await _mediator.Send(new ExportAllBlogsQuery()),
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            $"{GlobalConstants.BlogTableName}_{DateTime.Now.ToFileTime()}.xlsx");
     }
 
     /// <summary>

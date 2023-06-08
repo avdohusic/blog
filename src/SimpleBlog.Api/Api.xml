@@ -18,6 +18,13 @@
             <response code="200">Returns specific blog by id</response>
             <returns></returns>
         </member>
+        <member name="M:SimpleBlog.Api.Controllers.BlogController.ExportAllBlogs">
+            <summary>
+            Returns exported blogs in an Excel file
+            </summary>
+            <response code="200">Returns Excel file</response>
+            <returns></returns>
+        </member>
         <member name="M:SimpleBlog.Api.Controllers.BlogController.CreateBlog(SimpleBlog.Application.Features.Blogs.Commands.CreateBlogCommand)">
             <summary>
             Create a blog
