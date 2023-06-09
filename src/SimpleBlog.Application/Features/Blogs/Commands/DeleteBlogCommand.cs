@@ -5,7 +5,7 @@ namespace SimpleBlog.Application.Features.Blogs.Commands;
 
 public sealed record DeleteBlogCommand(Guid BlogId) : ICommand;
 
-internal class DeleteBlogCommandHandler : ICommandHandler<DeleteBlogCommand>
+public class DeleteBlogCommandHandler : ICommandHandler<DeleteBlogCommand>
 {
     private readonly IBlogRepository _blogRepository;
 

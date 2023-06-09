@@ -8,6 +8,7 @@ public sealed class BlogProfile : Profile
     {
         CreateMap<Blog, BlogDto>()
             .ConstructUsing(blog => new BlogDto(blog.Id, blog.Title, blog.Content, blog.Author, blog.PublicationDate))
+            .ForMember(destinationMember: model => model.BlogId, memberOptions: expression => expression.MapFrom(mapExpression: actor => actor.Id))
             .ReverseMap();
         CreateMap<Blog, BlogExcelDto>()
             .ForMember(destinationMember: model => model.BlogId, memberOptions: expression => expression.MapFrom(mapExpression: actor => actor.Id))

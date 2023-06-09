@@ -6,7 +6,7 @@ namespace SimpleBlog.Application.Features.Blogs.Queries;
 
 public sealed record GetBlogByIdQuery(Guid BlogId) : IQuery<BlogDto>;
 
-internal class GetBlogByIdQueryHandler : IQueryHandler<GetBlogByIdQuery, BlogDto>
+public class GetBlogByIdQueryHandler : IQueryHandler<GetBlogByIdQuery, BlogDto>
 {
     private readonly IBlogRepository _blogRepository;
     private readonly IMapper _mapper;

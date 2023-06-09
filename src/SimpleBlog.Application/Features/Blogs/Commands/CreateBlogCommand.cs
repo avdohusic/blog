@@ -24,7 +24,7 @@ public sealed class CreateBlogCommandValidator : AbstractValidator<CreateBlogCom
     }
 }
 
-internal class CreateBlogCommandHandler : ICommandHandler<CreateBlogCommand, BlogDto>
+public class CreateBlogCommandHandler : ICommandHandler<CreateBlogCommand, BlogDto>
 {
     private readonly IBlogRepository _blogRepository;
     private readonly IMapper _mapper;

@@ -17,7 +17,7 @@ public sealed class ImportBlogCommandValidator : AbstractValidator<ImportBlogCom
     }
 }
 
-internal class ImportBlogCommandHandler : ICommandHandler<ImportBlogCommand>
+public class ImportBlogCommandHandler : ICommandHandler<ImportBlogCommand>
 {
     private readonly IBlogRepository _blogRepository;
     private readonly IMapper _mapper;

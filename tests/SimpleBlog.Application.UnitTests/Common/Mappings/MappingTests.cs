@@ -31,6 +31,7 @@ public class MappingTests
 
     [Theory]
     [InlineData(typeof(Blog), typeof(BlogDto))]
+    [InlineData(typeof(Blog), typeof(BlogExcelDto))]
     [InlineData(typeof(UserIdentity), typeof(UserDto))]
     public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
     {
