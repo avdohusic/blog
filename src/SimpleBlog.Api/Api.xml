@@ -25,6 +25,14 @@
             <response code="200">Returns Excel file</response>
             <returns></returns>
         </member>
+        <member name="M:SimpleBlog.Api.Controllers.BlogController.ImportBlogs(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Import Blogs from Excel file
+            </summary>
+            <response code="204">The import of the blog was successful</response>
+            <response code="400">Excel sheet is not in valid format</response>
+            <returns></returns>
+        </member>
         <member name="M:SimpleBlog.Api.Controllers.BlogController.CreateBlog(SimpleBlog.Application.Features.Blogs.Commands.CreateBlogCommand)">
             <summary>
             Create a blog

@@ -67,6 +67,22 @@ public class BlogController : BaseController
     }
 
     /// <summary>
+    /// Import Blogs from Excel file
+    /// </summary>
+    /// <response code="204">The import of the blog was successful</response>
+    /// <response code="400">Excel sheet is not in valid format</response>
+    /// <returns></returns>
+    [HttpPost("import")]
+    [ProducesResponseType(typeof(BlogDto), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> ImportBlogs(IFormFile file)
+    {
+        await _mediator.Send(new ImportBlogCommand(file?.OpenReadStream()));
+
+        return NoContent();
+    }
+
+    /// <summary>
     /// Create a blog
     /// </summary>
     /// <response code="201">Returns newly created blog</response>
