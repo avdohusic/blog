@@ -6,6 +6,7 @@ using SimpleBlog.Application.Features.Blogs.Commands;
 using SimpleBlog.Domain.Repositories;
 
 namespace SimpleBlog.Application.UnitTests.Features.Blogs;
+
 public class CreateBlogCommandHandlerShould
 {
     private readonly CreateBlogCommandHandler _sut;

@@ -47,10 +47,13 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
             return AuthenticateResult.Fail($"Authentication failed: {ex.Message}");
         }
 
+        ;
+
         var claims = new[]
         {
             new Claim("UserIdentifier", userIdentifier.ToString()),
-            new Claim(ClaimTypes.Name, username)
+            new Claim(ClaimTypes.Name, username),
+            new Claim(ClaimTypes.Role, await _mediator.Send(new GetUserRolesByUsernameQuery(username)))
         };
         var identity = new ClaimsIdentity(claims, Scheme.Name);
         var principal = new ClaimsPrincipal(identity);

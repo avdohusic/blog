@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 
 namespace SimpleBlog.Application.Extensions;
+
 public static class DataTableObjectExtensions
 {
     /// <summary>

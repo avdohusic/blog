@@ -128,17 +128,49 @@ namespace SimpleBlog.Infrastructure.Data.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b0b8e881-63e7-4fae-a4aa-3735c8ef5dd4",
-                            Email = "avdo.husic@gmail.com",
+                            ConcurrencyStamp = "2bfe8ecf-6587-40df-845d-0117bfdcf805",
+                            Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "AVDO.HUSIC@GMAIL.COM",
-                            NormalizedUserName = "AVDOHUSIC",
+                            NormalizedEmail = "ADMIN@MAIL.COM",
+                            NormalizedUserName = "ADMIN",
                             PasswordHash = "AQAAAAIAAYagAAAAEHrrqTffzR2ZG8OWXWR7K4tRYX3R8vYaiOdqLfWzVBqdIChSLNJfKe1J2tuAWQN1rA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "CIMPVS4PPET7EIUGOTDT3WJYWM6JODXB",
                             TwoFactorEnabled = false,
-                            UserName = "avdohusic"
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4079d266-470f-4c04-8cd4-bdf28289bd75",
+                            Email = "publisher@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PUBLISHER@MAIL.COM",
+                            NormalizedUserName = "PUBLISHER",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHrrqTffzR2ZG8OWXWR7K4tRYX3R8vYaiOdqLfWzVBqdIChSLNJfKe1J2tuAWQN1rA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "CIMPVS4PPET7EIUGOTDT3WJYWM6JODXB",
+                            TwoFactorEnabled = false,
+                            UserName = "publisher"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3c13951f-e753-4419-9b68-2758acb1272c",
+                            Email = "user@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@MAIL.COM",
+                            NormalizedUserName = "USER",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHrrqTffzR2ZG8OWXWR7K4tRYX3R8vYaiOdqLfWzVBqdIChSLNJfKe1J2tuAWQN1rA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "CIMPVS4PPET7EIUGOTDT3WJYWM6JODXB",
+                            TwoFactorEnabled = false,
+                            UserName = "user"
                         });
                 });
 
@@ -170,6 +202,26 @@ namespace SimpleBlog.Infrastructure.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("Roles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Publisher",
+                            NormalizedName = "PUBLISHER"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("SimpleBlog.Domain.Entities.Identity.UserIdentityRoleClaim", b =>
@@ -254,6 +306,23 @@ namespace SimpleBlog.Infrastructure.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 3
+                        });
                 });
 
             modelBuilder.Entity("SimpleBlog.Domain.Entities.Identity.UserIdentityUserToken", b =>

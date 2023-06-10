@@ -2,6 +2,7 @@
 using System;
 
 namespace SimpleBlog.Domain.Entities.Abstract;
+
 public abstract class BaseEntity
 {
     public DateTime CreatedAt { get; set; } = LocalClock.GetTime();

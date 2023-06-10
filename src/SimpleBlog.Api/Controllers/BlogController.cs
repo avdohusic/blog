@@ -12,8 +12,8 @@ namespace SimpleBlog.Api.Controllers;
 
 [Authorize]
 [ApiController]
-[Produces("application/json")]
 [Route("api/blogs")]
+[Produces("application/json")]
 public class BlogController : BaseController
 {
     private readonly IMediator _mediator;
@@ -29,6 +29,7 @@ public class BlogController : BaseController
     /// <response code="200">Returns list of blogs</response>
     /// <returns></returns>
     [HttpGet]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(List<BlogDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAllBlogs()
     {
@@ -42,9 +43,13 @@ public class BlogController : BaseController
     /// Returns blog by id
     /// </summary>
     /// <response code="200">Returns specific blog by id</response>
+    /// <response code="401">Unauthorized user</response>
+    /// <response code="404">The blog was not found</response>
     /// <returns></returns>
     [HttpGet("{blogId}")]
+    [Authorize(Roles = "Administrator,Publisher,User")]
     [ProducesResponseType(typeof(BlogDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetBlogById(Guid blogId)
     {
@@ -56,9 +61,14 @@ public class BlogController : BaseController
     /// Returns exported blogs in an Excel file
     /// </summary>
     /// <response code="200">Returns Excel file</response>
+    /// <response code="401">Unauthorized user</response>
+    /// <response code="403">Missing required permission</response>
     /// <returns></returns>
     [HttpGet("export")]
+    [Authorize(Roles = "Administrator")]
     [ProducesResponseType(typeof(File), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status403Forbidden)]
     public async Task<IActionResult> ExportAllBlogs()
     {
         return File(await _mediator.Send(new ExportAllBlogsQuery()),
@@ -71,10 +81,15 @@ public class BlogController : BaseController
     /// </summary>
     /// <response code="204">The import of the blog was successful</response>
     /// <response code="400">Excel sheet is not in valid format</response>
+    /// <response code="401">Unauthorized user</response>
+    /// <response code="403">Missing required permission</response>
     /// <returns></returns>
     [HttpPost("import")]
+    [Authorize(Roles = "Administrator")]
     [ProducesResponseType(typeof(BlogDto), StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status403Forbidden)]
     public async Task<IActionResult> ImportBlogs(IFormFile file)
     {
         await _mediator.Send(new ImportBlogCommand(file?.OpenReadStream()));
@@ -87,10 +102,15 @@ public class BlogController : BaseController
     /// </summary>
     /// <response code="201">Returns newly created blog</response>
     /// <response code="400">One or more properties are not valid</response>
+    /// <response code="401">Unauthorized user</response>
+    /// <response code="403">Missing required permission</response>
     /// <returns></returns>
     [HttpPost]
+    [Authorize(Roles = "Publisher")]
     [ProducesResponseType(typeof(BlogDto), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status403Forbidden)]
     public async Task<IActionResult> CreateBlog(CreateBlogCommand command)
     {
         var result = await _mediator.Send(command);
@@ -103,11 +123,16 @@ public class BlogController : BaseController
     /// </summary>
     /// <response code="200">Returns updated blog</response>
     /// <response code="400">One or more properties are not valid</response>
+    /// <response code="401">Unauthorized user</response>
+    /// <response code="403">Missing required permission</response>
     /// <response code="404">The blog was not found</response>
     /// <returns></returns>
     [HttpPut("{blogId}")]
+    [Authorize(Roles = "Publisher")]
     [ProducesResponseType(typeof(BlogDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status403Forbidden)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateBlog(Guid blogId, UpdateBlogCommand command)
     {
@@ -121,10 +146,15 @@ public class BlogController : BaseController
     /// Delete a blog
     /// </summary>
     /// <response code="204">The blog was successfully deleted</response>
+    /// <response code="401">Unauthorized user</response>
+    /// <response code="403">Missing required permission</response>
     /// <response code="404">The blog was not found</response>
     /// <returns></returns>
     [HttpDelete("{blogId}")]
+    [Authorize(Roles = "Administrator,Publisher")]
     [ProducesResponseType(typeof(BlogDto), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status403Forbidden)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteBlog(Guid blogId)
     {

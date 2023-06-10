@@ -24,7 +24,5 @@ public class BlogConfiguration : IEntityTypeConfiguration<Blog>
 
         builder.Property(e => e.PublicationDate)
                .IsRequired();
-
-
     }
 }

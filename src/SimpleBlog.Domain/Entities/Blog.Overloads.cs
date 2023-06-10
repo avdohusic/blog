@@ -1,6 +1,7 @@
 ﻿using System;
 
 namespace SimpleBlog.Domain.Entities;
+
 public partial class Blog
 {
     public static Blog New(string title, string content)
@@ -31,5 +32,4 @@ public partial class Blog
         PublicationDate = publicationDate;
         return this;
     }
-
 }

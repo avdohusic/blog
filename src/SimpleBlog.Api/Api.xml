@@ -16,6 +16,8 @@
             Returns blog by id
             </summary>
             <response code="200">Returns specific blog by id</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">The blog was not found</response>
             <returns></returns>
         </member>
         <member name="M:SimpleBlog.Api.Controllers.BlogController.ExportAllBlogs">
@@ -23,6 +25,8 @@
             Returns exported blogs in an Excel file
             </summary>
             <response code="200">Returns Excel file</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Missing required permission</response>
             <returns></returns>
         </member>
         <member name="M:SimpleBlog.Api.Controllers.BlogController.ImportBlogs(Microsoft.AspNetCore.Http.IFormFile)">
@@ -31,6 +35,8 @@
             </summary>
             <response code="204">The import of the blog was successful</response>
             <response code="400">Excel sheet is not in valid format</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Missing required permission</response>
             <returns></returns>
         </member>
         <member name="M:SimpleBlog.Api.Controllers.BlogController.CreateBlog(SimpleBlog.Application.Features.Blogs.Commands.CreateBlogCommand)">
@@ -39,6 +45,8 @@
             </summary>
             <response code="201">Returns newly created blog</response>
             <response code="400">One or more properties are not valid</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Missing required permission</response>
             <returns></returns>
         </member>
         <member name="M:SimpleBlog.Api.Controllers.BlogController.UpdateBlog(System.Guid,SimpleBlog.Application.Features.Blogs.Commands.UpdateBlogCommand)">
@@ -47,6 +55,8 @@
             </summary>
             <response code="200">Returns updated blog</response>
             <response code="400">One or more properties are not valid</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Missing required permission</response>
             <response code="404">The blog was not found</response>
             <returns></returns>
         </member>
@@ -55,6 +65,8 @@
             Delete a blog
             </summary>
             <response code="204">The blog was successfully deleted</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Missing required permission</response>
             <response code="404">The blog was not found</response>
             <returns></returns>
         </member>

@@ -60,6 +60,17 @@ public class GlobalExceptionHandlingMiddleware
             };
             await context.Response.WriteAsJsonAsync(errorResult);
         }
+        catch (UnauthorizedAccessException)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            var errorResult = new ErrorResult()
+            {
+                Title = MessageConstants.UnauthorizedTitle,
+                Status = context.Response.StatusCode,
+                Message = MessageConstants.UnauthorizedMessage,
+            };
+            await context.Response.WriteAsJsonAsync(errorResult);
+        }
         catch (Exception exception)
         {
             _logger.LogError(exception, exception.Message);

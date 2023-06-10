@@ -6,6 +6,7 @@ using SimpleBlog.Infrastructure.Data;
 using System.Reflection;
 
 namespace SimpleBlog.Infrastructure.Extensions;
+
 public static class ConfigureDbContext
 {
     public static IServiceCollection AddSimleDbContext(this IServiceCollection services, IConfiguration configuration)
@@ -17,6 +18,7 @@ public static class ConfigureDbContext
                 sql => sql.MigrationsAssembly(migrationsAssembly)));
 
         services.AddIdentityCore<UserIdentity>()
+                .AddRoles<UserIdentityRole>()
                 .AddEntityFrameworkStores<SimpleBlogDbContext>();
 
         return services;

@@ -12,4 +12,7 @@ public static class MessageConstants
 
     public const string NotFoundTitle = "Not Found";
     public const string NotFoundMessage = "We're sorry, but the requested resource could not be found.";
+
+    public const string UnauthorizedTitle = "User not allowed or not logged in.";
+    public const string UnauthorizedMessage = "We're sorry, but the request cannot be realized due permissions rule.";
 }

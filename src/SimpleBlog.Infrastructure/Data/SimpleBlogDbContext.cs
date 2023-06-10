@@ -15,7 +15,10 @@ public class SimpleBlogDbContext : IdentityDbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(InfrastructureAssembly).Assembly);
+
         modelBuilder.SeedUsers();
+        modelBuilder.SeedIdentityRoles();
+        modelBuilder.SeedUsersRoles();
 
         base.OnModelCreating(modelBuilder);
     }

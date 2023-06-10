@@ -18,11 +18,15 @@ public sealed class GetUserByUsernameAndPasswordQueryHandler : IQueryHandler<Get
     public async Task<UserIdentity> Handle(GetUserByUsernameAndPasswordQuery request, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByNameAsync(request.Username);
-        var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
-        if (result == PasswordVerificationResult.Success)
+        if (user != null)
         {
-            return user;
+            var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
+            if (result == PasswordVerificationResult.Success)
+            {
+                return user;
+            }
         }
+
         return await Task.FromResult<UserIdentity>(null);
     }
 }
