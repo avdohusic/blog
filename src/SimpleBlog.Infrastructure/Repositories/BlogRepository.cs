@@ -9,28 +9,28 @@ public class BlogRepository : IBlogRepository
 
     public BlogRepository(SimpleBlogDbContext dbContext)
     {
-        this._dbContext = dbContext;
+        _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<Blog>> GetAllBlogs()
+    public async Task<IEnumerable<Blog>> GetAllBlogsAsync()
     {
         return await _dbContext.Blogs.AsNoTracking().ToListAsync();
     }
 
-    public async Task<Blog> GetBlogById(Guid blogId)
+    public async Task<Blog> GetBlogByIdAsync(Guid blogId)
     {
         return await _dbContext.Blogs.AsNoTracking().FirstOrDefaultAsync(b => b.Id == blogId);
     }
 
-    public async Task AddBlog(Blog blog)
+    public async Task AddBlogAsync(Blog blog)
     {
         _dbContext.Blogs.Add(blog);
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<bool> UpdateBlog(Guid blogId, Blog updatedBlog)
+    public async Task<bool> UpdateBlogAsync(Guid blogId, Blog updatedBlog)
     {
-        Blog existingBlog = await _dbContext.Blogs.FirstOrDefaultAsync(b => b.Id == blogId);
+        var existingBlog = await _dbContext.Blogs.FirstOrDefaultAsync(b => b.Id == blogId);
         if (existingBlog != null)
         {
             existingBlog
@@ -43,9 +43,9 @@ public class BlogRepository : IBlogRepository
         return false;
     }
 
-    public async Task<bool> DeleteBlog(Guid blogId)
+    public async Task<bool> DeleteBlogAsync(Guid blogId)
     {
-        Blog blog = await _dbContext.Blogs.FirstOrDefaultAsync(b => b.Id == blogId);
+        var blog = await _dbContext.Blogs.FirstOrDefaultAsync(b => b.Id == blogId);
         if (blog != null)
         {
             _dbContext.Blogs.Remove(blog);

@@ -37,13 +37,13 @@ public class UpdateBlogCommandHandler : ICommandHandler<UpdateBlogCommand, BlogD
 
     public UpdateBlogCommandHandler(IBlogRepository blogRepository, IMapper mapper)
     {
-        this._blogRepository = blogRepository;
-        this._mapper = mapper;
+        _blogRepository = blogRepository;
+        _mapper = mapper;
     }
 
     public async Task<BlogDto> Handle(UpdateBlogCommand request, CancellationToken cancellationToken)
     {
-        var existingBlog = await _blogRepository.GetBlogById(request.BlogId);
+        var existingBlog = await _blogRepository.GetBlogByIdAsync(request.BlogId);
         if (existingBlog == null)
         {
             throw new NotFoundException(nameof(Blog), request.BlogId);
@@ -53,7 +53,7 @@ public class UpdateBlogCommandHandler : ICommandHandler<UpdateBlogCommand, BlogD
         existingBlog.Content = request.Content;
         existingBlog.Author = request.Author;
 
-        await _blogRepository.UpdateBlog(request.BlogId, existingBlog);
+        await _blogRepository.UpdateBlogAsync(request.BlogId, existingBlog);
         return _mapper.Map<BlogDto>(existingBlog);
     }
 }

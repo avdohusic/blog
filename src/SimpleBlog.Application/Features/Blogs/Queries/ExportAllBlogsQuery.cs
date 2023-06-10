@@ -21,7 +21,7 @@ public class ExportAllBlogsQueryHandler : IQueryHandler<ExportAllBlogsQuery, Mem
 
     public async Task<MemoryStream> Handle(ExportAllBlogsQuery request, CancellationToken cancellationToken)
     {
-        var blogs = await _blogRepository.GetAllBlogs();
+        var blogs = await _blogRepository.GetAllBlogsAsync();
         var mappedBlogs = _mapper.Map<IEnumerable<BlogExcelDto>>(blogs);
 
         // Create the workbook

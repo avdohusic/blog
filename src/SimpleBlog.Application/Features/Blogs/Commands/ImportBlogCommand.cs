@@ -37,11 +37,11 @@ public class ImportBlogCommandHandler : ICommandHandler<ImportBlogCommand>
             {
                 if (blogItem.BlogId.HasValue) //Perhaps that Blog exists in a database, in the real scenario, we should check if really exist.
                 {
-                    await _blogRepository.UpdateBlog(blogItem.BlogId.Value, _mapper.Map<Blog>(blogItem));
+                    await _blogRepository.UpdateBlogAsync(blogItem.BlogId.Value, _mapper.Map<Blog>(blogItem));
                 }
                 else
                 {
-                    await _blogRepository.AddBlog(_mapper.Map<Blog>(blogItem));
+                    await _blogRepository.AddBlogAsync(_mapper.Map<Blog>(blogItem));
                 }
             }
         }

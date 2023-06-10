@@ -16,12 +16,12 @@ public sealed class GetUserRolesByUsernameQueryHandler : IQueryHandler<GetUserRo
     public async Task<string> Handle(GetUserRolesByUsernameQuery request, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByNameAsync(request.Username);
-        var roles = await _userManager.GetRolesAsync(user);
-        if (roles == null)
+        var userRoles = await _userManager.GetRolesAsync(user);
+        if (userRoles == null)
         {
             return string.Empty;
         }
 
-        return string.Join(",", roles);
+        return string.Join(",", userRoles);
     }
 }

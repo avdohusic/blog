@@ -6,13 +6,13 @@ namespace SimpleBlog.Domain.Repositories;
 
 public interface IBlogRepository
 {
-    Task AddBlog(Blog blog);
+    Task AddBlogAsync(Blog blog);
 
-    Task<bool> DeleteBlog(Guid blogId);
+    Task<bool> DeleteBlogAsync(Guid blogId);
 
-    Task<IEnumerable<Blog>> GetAllBlogs();
+    Task<IEnumerable<Blog>> GetAllBlogsAsync();
 
-    Task<Blog> GetBlogById(Guid blogId);
+    Task<Blog> GetBlogByIdAsync(Guid blogId);
 
-    Task<bool> UpdateBlog(Guid blogId, Blog updatedBlog);
+    Task<bool> UpdateBlogAsync(Guid blogId, Blog updatedBlog);
 }

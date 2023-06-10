@@ -14,11 +14,8 @@ namespace SimpleBlog.Api.Controllers;
 [Route("api/users")]
 public class UserController : BaseController
 {
-    private readonly IMediator _mediator;
-
-    public UserController(IMediator mediator)
+    public UserController(IMediator mediator) : base(mediator)
     {
-        _mediator = mediator;
     }
 
     /// <summary>

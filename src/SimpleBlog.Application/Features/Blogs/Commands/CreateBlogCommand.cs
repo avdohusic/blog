@@ -41,7 +41,7 @@ public class CreateBlogCommandHandler : ICommandHandler<CreateBlogCommand, BlogD
             .WithAuthor(request.Author)
             .WithPublicationDate(LocalClock.GetTime());
 
-        await _blogRepository.AddBlog(blog);
+        await _blogRepository.AddBlogAsync(blog);
 
         var mappedBlog = _mapper.Map<BlogDto>(blog);
         return mappedBlog;

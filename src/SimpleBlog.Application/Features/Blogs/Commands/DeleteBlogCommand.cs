@@ -11,17 +11,17 @@ public class DeleteBlogCommandHandler : ICommandHandler<DeleteBlogCommand>
 
     public DeleteBlogCommandHandler(IBlogRepository blogRepository)
     {
-        this._blogRepository = blogRepository;
+        _blogRepository = blogRepository;
     }
 
     public async Task Handle(DeleteBlogCommand request, CancellationToken cancellationToken)
     {
-        var blog = _blogRepository.GetBlogById(request.BlogId);
+        var blog = _blogRepository.GetBlogByIdAsync(request.BlogId);
         if (blog is null)
         {
             throw new NotFoundException(nameof(Blog), request.BlogId);
         }
 
-        await _blogRepository.DeleteBlog(request.BlogId);
+        await _blogRepository.DeleteBlogAsync(request.BlogId);
     }
 }

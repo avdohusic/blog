@@ -16,11 +16,9 @@ namespace SimpleBlog.Api.Controllers;
 [Produces("application/json")]
 public class BlogController : BaseController
 {
-    private readonly IMediator _mediator;
 
-    public BlogController(IMediator mediator)
+    public BlogController(IMediator mediator) : base(mediator)
     {
-        _mediator = mediator;
     }
 
     /// <summary>

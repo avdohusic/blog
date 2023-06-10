@@ -18,7 +18,7 @@ public class GetAllBlogsQueryHandler : IQueryHandler<GetAllBlogsQuery, IEnumerab
 
     public async Task<IEnumerable<BlogDto>> Handle(GetAllBlogsQuery request, CancellationToken cancellationToken)
     {
-        var blogs = await _blogRepository.GetAllBlogs();
+        var blogs = await _blogRepository.GetAllBlogsAsync();
         return _mapper.Map<IEnumerable<BlogDto>>(blogs);
     }
 }

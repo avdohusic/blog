@@ -19,7 +19,7 @@ public class GetBlogByIdQueryHandler : IQueryHandler<GetBlogByIdQuery, BlogDto>
 
     public async Task<BlogDto> Handle(GetBlogByIdQuery request, CancellationToken cancellationToken)
     {
-        var blog = await _blogRepository.GetBlogById(request.BlogId);
+        var blog = await _blogRepository.GetBlogByIdAsync(request.BlogId);
         if (blog is null)
         {
             throw new NotFoundException(nameof(Blog), request.BlogId);
