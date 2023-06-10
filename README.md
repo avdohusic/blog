@@ -1,9 +1,9 @@
 # Blog
-Simple blog with WYSIWYG
+Simple blog with CRUD Operations
 
 ## About project
-The app is used for posting simple news. 
-Users can login, post news, import or export news from excel source.
+The purpose of this project is to develop a simple blog application that utilizes a database for storing blog posts.
+The project follows the principles of the Command Query Responsibility Segregation (CQRS) pattern.
 
 ## Requirements
 **Technical pre-request:**
@@ -47,17 +47,30 @@ Users can login, post news, import or export news from excel source.
 - API documentation.
 
 ## How to get the project up and running
-TODO
+1. Clone the project
+2.  Run command `docker-compose up -d` in project's root
+3. Start the project
+4. If everything is ok, Swagger page inside of browser should open
+5. You can use pre-seeded users to test out requests (usernames: admin, publisher, user) with the same password: Test123!
+    - **username**: `admin`
+    - **password**: `Test123!`
+6. Happy coding :)
 
 ## Additional information
-TODO
+Database migrations have been configured to be migrated automatically on application startup.
+Please note that this is not a best practice by any means, but rather to enable the app to be started as easily as possible.
 
 ## Project structure
-TODO
+Project is built using principles of the clean architecture with .NET 7, C# 10 and MSSQL as a database provider.
 
-## Further improvements
-TODO
-
+- src
+    - API: *contains Api project*
+    - Application: *contains business logic, request/response contract models and domain entities*
+    - Domain: *contains entities, enums and constants. Everything related to the core or domain of application*
+    - Infrastructure: *contains persistence configuration*
+- tests
+    - Unit tests
+    - Arhitecture tests
 
 ## Contributors
 Code is written and maintained by Avdo Husic. You can reach me at: avdo.husic@gmail.com
