@@ -52,8 +52,10 @@ The project follows the principles of the Command Query Responsibility Segregati
 3. Start the project
 4. If everything is ok, Swagger page inside of browser should open
 5. You can use pre-seeded users to test out requests (usernames: admin, publisher, user) with the same password: Test123!
+
     - **username**: `admin`
     - **password**: `Test123!`
+
 5.1. - Everyone can access to get all blog endpoint, including non logged user
 5.2. - Administrator can access to: Get by ID, export, import and delete blog endpoints
 5.3. - Publisher can access to: Get by ID, create, update and delete blog endpoints
