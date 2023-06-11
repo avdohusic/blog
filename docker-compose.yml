@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  sqlserver:
+  sqlserver.dependency:
     container_name: simpleblog-dependency-mssql
     image: mcr.microsoft.com/mssql/server
     restart: unless-stopped
@@ -29,4 +29,4 @@ services:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
-      - sqlserver
+      - sqlserver.dependency
