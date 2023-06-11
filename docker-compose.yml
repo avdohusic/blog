@@ -10,7 +10,7 @@ services:
       - ACCEPT_EULA=Y.
       - SA_PASSWORD=Test123!
     ports:
-      - "1434:1433"
+      - "1438:1433"
     volumes:
       - ./data/sqldata:/var/opt/mssql/data
   SimpleBlog.api:
