@@ -54,7 +54,7 @@ The project follows the principles of the Command Query Responsibility Segregati
 4. In case that you have problem with docker, you can run projecti in VisualStudio, right click on `SimpleBlog.Api` -> Set as Startup Project (choose `http` profile from launch settings) and uncomment connection string for local mssql in `appsettings.json`
 5. URL: `https://localhost:9021/api-docs/index.html` or `http://localhost:9020/api-docs/index.html`
 - **FRONTEND**
-6. Run command `npm install` in folder `frontend`
+6. Run command `npm install` inside `frontend` folder
 7. Run command `ng serve`
 8. Navigate to `http://localhost:4200` from your browser
 9. You can use pre-seeded users to test out requests:
@@ -68,8 +68,8 @@ The project follows the principles of the Command Query Responsibility Segregati
     - **Publisher** can access to: create, update and delete blog endpoints
 
 ## Additional information
-Database migrations have been configured to be migrated automatically on application startup.
-Please note that this is not a best practice by any means, but rather to enable the app to be started as easily as possible.
+- Database migrations have been configured to be migrated automatically on application startup. Please note that this is not a best practice by any means, but rather to enable the app to be started as easily as possible.
+- Frontend: I had to perform the UI quickly as a result of the time limit and other obligations in my life. I rushed through the process and did not follow the best practices of coding. Also, I didn't have time to cover my code with comments and tests.
 
 ## Project structure
 Project is built using principles of the clean architecture with .NET 7, C# 10 and MSSQL as a database provider.
