@@ -27,7 +27,6 @@ public class BlogController : BaseController
     /// <response code="200">Returns list of blogs</response>
     /// <returns></returns>
     [HttpGet]
-    //[AllowAnonymous]
     [ProducesResponseType(typeof(List<BlogDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAllBlogs()
     {
@@ -45,7 +44,6 @@ public class BlogController : BaseController
     /// <response code="404">The blog was not found</response>
     /// <returns></returns>
     [HttpGet("{blogId}")]
-    [Authorize(Roles = "Administrator,Publisher,User")]
     [ProducesResponseType(typeof(BlogDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status404NotFound)]
@@ -150,7 +148,7 @@ public class BlogController : BaseController
     /// <response code="404">The blog was not found</response>
     /// <returns></returns>
     [HttpDelete("{blogId}")]
-    [Authorize(Roles = "Administrator,Publisher")]
+    [Authorize(Roles = "Publisher")]
     [ProducesResponseType(typeof(BlogDto), StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status403Forbidden)]

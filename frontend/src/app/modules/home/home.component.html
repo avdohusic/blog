@@ -3,13 +3,13 @@
     <div class="card-body">
 
       <div class="form-group">
-        <button class="btn btn-primary" type="button" (click)="openCreateBlogPage()">
+        <button *ngIf="isPublisher" class="btn btn-primary" type="button" (click)="openCreateBlogPage()">
           Add new Blog
         </button> |
-        <button class="btn btn-primary" type="button" (click)="exportBlogs()">
+        <button *ngIf="isAdmin" class="btn btn-primary" type="button" (click)="exportBlogs()">
           Export blogs
         </button> |
-        <button class="btn btn-primary" type="button" (click)="openImportBlogPage()">
+        <button *ngIf="isAdmin" class="btn btn-primary" type="button" (click)="openImportBlogPage()">
           Import blogs
         </button>
       </div>
@@ -23,7 +23,7 @@
                 <div class="col-md-8 col-xs-12 main-content col-md-pull-4">
                   <h2>
                     {{ i.title }}
-                    <button class="btn btn-info" type="button" (click)="openEditBlogPage(i.blogId)">
+                    <button *ngIf="isPublisher" class="btn btn-info" type="button" (click)="openEditBlogPage(i.blogId)">
                       Edit Blog
                     </button>
                   </h2>

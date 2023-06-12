@@ -32,9 +32,9 @@ public class UserController : BaseController
     /// <returns></returns>
     [AllowAnonymous]
     [HttpPost("login")]
+    [ProducesDefaultResponseType]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesDefaultResponseType]
     public async Task<ActionResult> Login([FromBody] UserLoginInputModel model)
     {
         var command = new GetUserByUsernameAndPasswordQuery(model.Username, model.Password);
