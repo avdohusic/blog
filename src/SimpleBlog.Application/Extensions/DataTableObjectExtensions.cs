@@ -65,7 +65,7 @@ public static class DataTableObjectExtensions
                 new { Index = n, ColumnName = worksheet.Cells[1, n].Value.ToString().ToLower().Replace(" ", "") }
             );
 
-            for (int row = 2; row < worksheet.Dimension.Rows; row++)
+            for (int row = 2; row <= worksheet.Dimension.Rows; row++)
             {
                 T obj = (T)Activator.CreateInstance(typeof(T));//generic object
                 foreach (var prop in typeof(T).GetProperties())

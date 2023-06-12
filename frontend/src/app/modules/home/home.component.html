@@ -1,0 +1,46 @@
+﻿<div class="card mt-4">
+    <h4 class="card-header">You're logged in to Simple Blog app - Latest Posts</h4>
+    <div class="card-body">
+
+      <div class="form-group">
+        <button class="btn btn-primary" type="button" (click)="openCreateBlogPage()">
+          Add new Blog
+        </button> |
+        <button class="btn btn-primary" type="button" (click)="exportBlogs()">
+          Export blogs
+        </button> |
+        <button class="btn btn-primary" type="button" (click)="openImportBlogPage()">
+          Import blogs
+        </button>
+      </div>
+
+      <div class="container">
+        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+        <div *ngIf="blogs" class="row">
+          <div *ngFor="let i of blogs;let c= index" >
+            <div class="col-md-12 col-sm-12 col-xs-12 col-md-pull-5 mt-4">
+              <div class="card row">
+                <div class="col-md-8 col-xs-12 main-content col-md-pull-4">
+                  <h2>
+                    {{ i.title }}
+                    <button class="btn btn-info" type="button" (click)="openEditBlogPage(i.blogId)">
+                      Edit Blog
+                    </button>
+                  </h2>
+
+                  <p class="desc desc1" [innerHTML]="i.content| trustHtml"></p>
+                </div>
+                <div class="col-md-12 col-xs-12">
+                  <p>
+                    By : {{ i.author }}, Date : {{ i.publicationDate | date }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<router-outlet></router-outlet>

@@ -36,6 +36,7 @@ public class BlogRepository : IBlogRepository
             existingBlog
                 .WithTitle(updatedBlog.Title)
                 .WithContent(updatedBlog.Content)
+                .WithAuthor(updatedBlog.Author)
                 .WithPublicationDate(updatedBlog.PublicationDate);
             await _dbContext.SaveChangesAsync();
             return true;

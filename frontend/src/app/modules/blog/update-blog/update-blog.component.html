@@ -1,0 +1,42 @@
+<h1>Create Blog form</h1>
+
+<div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+
+<form [formGroup]="blogForm" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      formControlName="title"
+      id="title"
+      type="text"
+      class="form-control">
+    <div *ngIf="f['title'].touched && f['title'].invalid" class="alert alert-danger">
+      <div *ngIf="f['title'].errors && f['title'].errors['required']">Title is required.</div>
+      <div *ngIf="f['title'].errors && f['title'].errors['minlength']">Title should be 3 character.</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="author">Author</label>
+    <input
+      formControlName="author"
+      id="author"
+      type="text"
+      class="form-control">
+    <div *ngIf="f['author'].touched && f['author'].invalid" class="alert alert-danger">
+      <div *ngIf="f['author'].errors && f['author'].errors['required']">Author is required.</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="content">Content</label>
+    <angular-editor id="content" formControlName="content" [config]="config"></angular-editor>
+    <div *ngIf="f['content'].touched && f['content'].invalid" class="alert alert-danger">
+      <div *ngIf="f['content'].errors && f['content'].errors['required']">Content is required.</div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" [disabled]="blogForm.invalid" type="submit">Submit</button> |
+  <button class="btn btn-danger" type="button" (click)="deleteBlog()">Delete Blog</button> |
+  <button class="btn btn-info" type="button" (click)="goToIndex()">Cancel</button>
+</form>

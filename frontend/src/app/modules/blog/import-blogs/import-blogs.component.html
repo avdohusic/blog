@@ -1,0 +1,22 @@
+<h1>Import Blogs from Excel file</h1>
+
+<div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+
+<form [formGroup]="uploadForm" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label for="file">File</label>
+    <input
+      formControlName="file"
+      id="file"
+      type="file"
+      class="form-control"
+      (change)="onFileChange($event)">
+    <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">
+      <div *ngIf="f['file'].errors && f['file'].errors['required']">File is required.</div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" [disabled]="uploadForm.invalid" type="submit">Submit</button> |
+
+  <button class="btn btn-info" type="button" (click)="goToIndex()">Cancel</button>
+</form>

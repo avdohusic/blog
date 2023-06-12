@@ -5,12 +5,15 @@ using SimpleBlog.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersDefault()
-                .AddEndpointsApiExplorer()
-                .AddSwaggerGenDefault()
-                .AddAuthenticationDefault()
-                .AddApplicationServices()
-                .AddInfrastructureConfig(builder.Configuration);
+builder.Services
+    .AddCorsConfiguration(builder.Configuration)
+    .AddControllersDefault()
+    .AddEndpointsApiExplorer()
+    .AddSwaggerGenDefault()
+    .AddAuthenticationDefault()
+    .AddApplicationServices()
+    .AddInfrastructureConfig(builder.Configuration);
+
 
 var app = builder.Build();
 
@@ -33,9 +36,13 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+
+app.UseRouting();
+
+app.UseCors(policyName: "DefaultPolicy");
 
 app.UseAuthentication();
 

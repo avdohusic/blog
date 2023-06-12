@@ -79,4 +79,27 @@ public static class StartupHelper
 
         return services;
     }
+
+    public static IServiceCollection AddCorsConfiguration(this IServiceCollection services, IConfiguration configuration)
+    {
+        var origins = configuration.GetSection(key: "Cors:Origins").Get<string>();
+        if (string.IsNullOrWhiteSpace(value: origins))
+        {
+            throw new Exception(message: "The configuration value 'Cors:Origins' cannot be null or empty.");
+        }
+
+        var urls = origins.Split(separator: ";");
+
+        services
+            .AddCors(setupAction: o => o.AddPolicy(name: "DefaultPolicy", configurePolicy: builder =>
+            {
+                builder
+                    .WithOrigins(origins: urls)
+                    .AllowCredentials()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
+
+        return services;
+    }
 }

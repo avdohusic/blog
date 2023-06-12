@@ -10,7 +10,7 @@ using SimpleBlog.Domain.Shared;
 
 namespace SimpleBlog.Api.Controllers;
 
-[Authorize]
+//[Authorize]
 [ApiController]
 [Route("api/blogs")]
 [Produces("application/json")]
@@ -45,7 +45,7 @@ public class BlogController : BaseController
     /// <response code="404">The blog was not found</response>
     /// <returns></returns>
     [HttpGet("{blogId}")]
-    [Authorize(Roles = "Administrator,Publisher,User")]
+    //[Authorize(Roles = "Administrator,Publisher,User")]
     [ProducesResponseType(typeof(BlogDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status404NotFound)]
@@ -63,15 +63,16 @@ public class BlogController : BaseController
     /// <response code="403">Missing required permission</response>
     /// <returns></returns>
     [HttpGet("export")]
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
     [ProducesResponseType(typeof(File), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status403Forbidden)]
     public async Task<IActionResult> ExportAllBlogs()
     {
-        return File(await _mediator.Send(new ExportAllBlogsQuery()),
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            $"{GlobalConstants.BlogTableName}_{DateTime.Now.ToFileTime()}.xlsx");
+        var memoryStream = await _mediator.Send(new ExportAllBlogsQuery());
+        var fileName = $"{GlobalConstants.BlogTableName}_{DateTime.Now.ToFileTime()}.xlsx";
+        HttpContext.Response.Headers.Add(GlobalConstants.FileNameHeaderKey, fileName);
+        return File(memoryStream, GlobalConstants.SpreadsheetmlContentType, fileName);
     }
 
     /// <summary>
@@ -83,7 +84,7 @@ public class BlogController : BaseController
     /// <response code="403">Missing required permission</response>
     /// <returns></returns>
     [HttpPost("import")]
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
     [ProducesResponseType(typeof(BlogDto), StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status401Unauthorized)]
@@ -104,7 +105,7 @@ public class BlogController : BaseController
     /// <response code="403">Missing required permission</response>
     /// <returns></returns>
     [HttpPost]
-    [Authorize(Roles = "Publisher")]
+    //[Authorize(Roles = "Publisher")]
     [ProducesResponseType(typeof(BlogDto), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status401Unauthorized)]
@@ -126,7 +127,7 @@ public class BlogController : BaseController
     /// <response code="404">The blog was not found</response>
     /// <returns></returns>
     [HttpPut("{blogId}")]
-    [Authorize(Roles = "Publisher")]
+    //[Authorize(Roles = "Publisher")]
     [ProducesResponseType(typeof(BlogDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status401Unauthorized)]
@@ -149,7 +150,7 @@ public class BlogController : BaseController
     /// <response code="404">The blog was not found</response>
     /// <returns></returns>
     [HttpDelete("{blogId}")]
-    [Authorize(Roles = "Administrator,Publisher")]
+    //[Authorize(Roles = "Administrator,Publisher")]
     [ProducesResponseType(typeof(BlogDto), StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status403Forbidden)]
