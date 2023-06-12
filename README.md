@@ -47,22 +47,25 @@ The project follows the principles of the Command Query Responsibility Segregati
 - API documentation.
 
 ## How to get the project up and running
-1. Clone the project
+1. Clone the project: `git clone https://github.com/avdohusic/blog.git`
+- **BACKEND**
 2.  Run command `docker-compose up -d` in project's root
-3. Start the project
-4. If everything is ok, Swagger page inside of browser should open
-5. You can use pre-seeded users to test out requests (usernames: admin, publisher, user) with the same password: Test123!
+3. If everything is ok, Swagger page inside of browser should open
+4. In case that you have problem with docker, you can run projecti in VisualStudio, right click on `SimpleBlog.Api` -> Set as Startup Project (choose `http` profile from launch settings) and uncomment connection string for local mssql in `appsettings.json`
+5. URL: `https://localhost:9021/api-docs/index.html` or `http://localhost:9020/api-docs/index.html`
+- **FRONTEND**
+6. Run command `npm install` in folder `frontend`
+7. Run command `ng serve`
+8. Navigate to `http://localhost:4200` from your browser
+9. You can use pre-seeded users to test out requests:
 
-    - **username**: `admin`
+    - **username**: `admin` or `publisher` or `user`
     - **password**: `Test123!`
 
-6. Permission level explanations:
-    - **Everyone** can access to get all blog endpoint, including non logged user
-    - **Administrator** can access to: Get by ID, export, import and delete blog endpoints
-    - **Publisher** can access to: Get by ID, create, update and delete blog endpoints
-    - **User** can access to Get by ID blog endpoint
-7. URL: https://localhost:9021/api-docs/index.html or http://localhost:9020/api-docs/index.html
-8. Happy coding :)
+10. Permission level explanations:
+    - **Every logged-in** can access to get all blogs and get by id endpoints
+    - **Administrator** can access to: export and import endpoints
+    - **Publisher** can access to: create, update and delete blog endpoints
 
 ## Additional information
 Database migrations have been configured to be migrated automatically on application startup.
