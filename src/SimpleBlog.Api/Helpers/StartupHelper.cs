@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -11,9 +12,25 @@ public static class StartupHelper
 {
     public static IServiceCollection AddAuthenticationDefault(this IServiceCollection services)
     {
-        services
-            .AddAuthentication("BasicAuthentication")
-            .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+        services.AddAuthentication(config =>
+        {
+            config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(config =>
+        {
+            config.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                RequireExpirationTime = false,
+
+                ValidIssuer = "SimpleBlog.Api.Security.Bearer",
+                ValidAudience = "SimpleBlog.Api.Security.Bearer",
+                IssuerSigningKey = JwtSecurityKey.Create("simpleblog-secret-key")
+            };
+        });
 
         return services;
     }
@@ -52,28 +69,29 @@ public static class StartupHelper
                 Version = "v1",
                 Description = "The official SimpleBlog Api documentation."
             });
-            config.AddSecurityDefinition("basic", new OpenApiSecurityScheme
+            config.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
             {
                 Name = "Authorization",
                 Type = SecuritySchemeType.Http,
-                Scheme = "basic",
+                Scheme = "Bearer",
                 In = ParameterLocation.Header,
-                Description = "Basic Authorization header using the Bearer scheme."
+                BearerFormat = "JWT",
+                Description = "Authorization header using the Bearer scheme."
             });
-            config.AddSecurityRequirement(new OpenApiSecurityRequirement
+            config.AddSecurityRequirement(new OpenApiSecurityRequirement 
             {
-                {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "basic"
-                        }
-                    },
-                    new string[] {}
+               {
+                 new OpenApiSecurityScheme
+                 {
+                   Reference = new OpenApiReference
+                   {
+                     Type = ReferenceType.SecurityScheme,
+                     Id = "Bearer"
+                   }
+                  },
+                  new string[] {}
                 }
-            });
+              });
             config.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Api.xml"));
         });
 

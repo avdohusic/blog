@@ -70,6 +70,14 @@
             <response code="404">The blog was not found</response>
             <returns></returns>
         </member>
+        <member name="M:SimpleBlog.Api.Controllers.UserController.Login(SimpleBlog.Api.Models.UserLoginInputModel)">
+            <summary>
+            Log in a user
+            </summary>
+            <response code="200">Returns JWT token</response>
+            <response code="400">One or more properties are not valid</response>
+            <returns></returns>
+        </member>
         <member name="M:SimpleBlog.Api.Controllers.UserController.Register(SimpleBlog.Api.Models.UserRegistrationInputModel)">
             <summary>
             Create a user

@@ -40,11 +40,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
-app.UseRouting();
-
 app.UseCors(policyName: "DefaultPolicy");
 
 app.UseAuthentication();
+
+app.UseRouting();
 
 app.UseAuthorization();
 
