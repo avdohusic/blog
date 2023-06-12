@@ -76,6 +76,7 @@
             </summary>
             <response code="200">Returns JWT token</response>
             <response code="400">One or more properties are not valid</response>
+            <response code="404">User not found</response>
             <returns></returns>
         </member>
         <member name="M:SimpleBlog.Api.Controllers.UserController.Register(SimpleBlog.Api.Models.UserRegistrationInputModel)">

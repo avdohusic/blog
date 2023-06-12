@@ -10,7 +10,7 @@ builder.Services
     .AddControllersDefault()
     .AddEndpointsApiExplorer()
     .AddSwaggerGenDefault()
-    .AddAuthenticationDefault()
+    .AddAuthenticationDefault(builder.Configuration)
     .AddApplicationServices()
     .AddInfrastructureConfig(builder.Configuration);
 

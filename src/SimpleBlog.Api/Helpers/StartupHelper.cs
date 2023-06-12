@@ -10,8 +10,17 @@ namespace SimpleBlog.Api.Helpers;
 
 public static class StartupHelper
 {
-    public static IServiceCollection AddAuthenticationDefault(this IServiceCollection services)
+    public static IServiceCollection AddAuthenticationDefault(this IServiceCollection services, IConfiguration configuration)
     {
+        var validIssuer = configuration.GetSection(key: "Jwt:ValidIssuer").Get<string>();
+        var validAudience = configuration.GetSection(key: "Jwt:ValidAudience").Get<string>();
+        var jwtSecretKey = configuration.GetSection(key: "Jwt:SecretKey").Get<string>();
+
+        if (string.IsNullOrWhiteSpace(value: validIssuer) || string.IsNullOrWhiteSpace(value: validAudience) || string.IsNullOrWhiteSpace(jwtSecretKey))
+        {
+            throw new Exception(message: "The configuration value 'Jwt:ValidIssuer', 'Jwt:ValidAudience' and 'Jwt:SecretKey' cannot be null or empty.");
+        }
+
         services.AddAuthentication(config =>
         {
             config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -25,10 +34,9 @@ public static class StartupHelper
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
                 RequireExpirationTime = false,
-
-                ValidIssuer = "SimpleBlog.Api.Security.Bearer",
-                ValidAudience = "SimpleBlog.Api.Security.Bearer",
-                IssuerSigningKey = JwtSecurityKey.Create("simpleblog-secret-key")
+                ValidIssuer = validIssuer,
+                ValidAudience = validAudience,
+                IssuerSigningKey = JwtSecurityKey.Create(jwtSecretKey)
             };
         });
 
@@ -78,7 +86,7 @@ public static class StartupHelper
                 BearerFormat = "JWT",
                 Description = "Authorization header using the Bearer scheme."
             });
-            config.AddSecurityRequirement(new OpenApiSecurityRequirement 
+            config.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
                {
                  new OpenApiSecurityScheme

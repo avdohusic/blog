@@ -17,8 +17,10 @@ namespace SimpleBlog.Api.Controllers;
 [Route("api/users")]
 public class UserController : BaseController
 {
-    public UserController(IMediator mediator) : base(mediator)
+    private readonly IConfiguration _configuration;
+    public UserController(IMediator mediator, IConfiguration configuration) : base(mediator)
     {
+        _configuration = configuration;
     }
 
     /// <summary>
@@ -26,9 +28,13 @@ public class UserController : BaseController
     /// </summary>
     /// <response code="200">Returns JWT token</response>
     /// <response code="400">One or more properties are not valid</response>
+    /// <response code="404">User not found</response>
     /// <returns></returns>
     [AllowAnonymous]
     [HttpPost("login")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesDefaultResponseType]
     public async Task<ActionResult> Login([FromBody] UserLoginInputModel model)
     {
         var command = new GetUserByUsernameAndPasswordQuery(model.Username, model.Password);
@@ -40,11 +46,12 @@ public class UserController : BaseController
         }
 
         var roles = await _mediator.Send(new GetUserRolesByUsernameQuery(model.Username));
+
         string token = new JwtTokenBuilder()
-                    .AddSecurityKey(JwtSecurityKey.Create("simpleblog-secret-key"))
+                    .AddSecurityKey(JwtSecurityKey.Create(_configuration.GetSection(key: "Jwt:SecretKey").Get<string>()))
                     .AddSubject(user.Email)
-                    .AddIssuer("SimpleBlog.Api.Security.Bearer")
-                    .AddAudience("SimpleBlog.Api.Security.Bearer")
+                    .AddIssuer(_configuration.GetSection(key: "Jwt:ValidIssuer").Get<string>())
+                    .AddAudience(_configuration.GetSection(key: "Jwt:ValidAudience").Get<string>())
                     .AddClaim("UserIdentifier", user.Id.ToString())
                     .AddClaim(ClaimTypes.Name, model.Username)
                     .AddClaim(ClaimTypes.Role, roles)
