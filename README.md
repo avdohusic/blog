@@ -1,5 +1,5 @@
 # Blog
-Simple blog with CRUD Operations
+Building a Simple CRUD Blog with Angular and .NET Core
 
 ## About project
 The purpose of this project is to develop a simple blog application that utilizes a database for storing blog posts.
@@ -27,24 +27,6 @@ The project follows the principles of the Command Query Responsibility Segregati
 - Use appropriate design patterns and principles (e.g., SOLID principles) in the implementation.
 - Write unit tests to ensure the correctness of the API.
 - Provide API documentation (e.g., using Swagger or similar tools) for easy integration by other developers.
-
-**Additional Guidelines:**
-- You can use any libraries or frameworks commonly used with ASP.NET Core.
-- Focus on writing clean, maintainable, and scalable code.
-- Consider performance optimizations where applicable.
-- Use Git for version control and provide a repository with your code.
-- Write short instructions for installation and usage.
-- Feel free to ask questions if any part of the task is unclear.
-
-**Evaluation Criteria:**
-- Code organization and structure.
-- Correct implementation of CRUD operations.
-- Proper input validation and error handling.
-- Implementation of authentication and authorization.
-- Design and implementation of the database schema and data access layer.
-- Usage of design patterns and principles.
-- Unit test coverage and correctness.
-- API documentation.
 
 ## How to get the project up and running
 1. Clone the project: `git clone https://github.com/avdohusic/blog.git`
