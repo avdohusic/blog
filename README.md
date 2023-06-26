@@ -1,5 +1,5 @@
 # Blog
-Building a Simple CRUD Blog with Angular and .NET Core
+Simple CRUD Blog with Angular and .NET Core
 
 ## About project
 The purpose of this project is to develop a simple blog application that utilizes a database for storing blog posts.
@@ -51,7 +51,6 @@ The project follows the principles of the Command Query Responsibility Segregati
 
 ## Additional information
 - Database migrations have been configured to be migrated automatically on application startup. Please note that this is not a best practice by any means, but rather to enable the app to be started as easily as possible.
-- Frontend: I had to perform the UI quickly as a result of the time limit and other obligations in my life. I rushed through the process and did not follow the best practices of coding. Also, I didn't have time to cover my code with comments and tests.
 
 ## Project structure
 Project is built using principles of the clean architecture with .NET 7, C# 10 and MSSQL as a database provider.
